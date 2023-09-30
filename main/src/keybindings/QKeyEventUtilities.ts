@@ -19,12 +19,9 @@ export function qKeyEventToMinimalKeyboardEvent(event: QKeyEvent): MinimalKeyboa
 
   let ctrlKey = (modifiers & Modifier.CTRL) !== 0;
   let metaKey = (modifiers & Modifier.META) !== 0;
-  if ((<Platform> process.platform) === "darwin") {
-    // Qt on macOS reverses the meaning of these keys compared to what they are commonly called.
-    const tmp = ctrlKey;
-    ctrlKey = metaKey;
-    metaKey = tmp;
-  }
+  const tmp = ctrlKey;
+  ctrlKey = metaKey;
+  metaKey = tmp;
   const shiftKey = (modifiers & Modifier.SHIFT) !== 0;
 
   const ev: MinimalKeyboardEvent = {
