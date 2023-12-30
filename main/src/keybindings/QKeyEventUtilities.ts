@@ -15,13 +15,12 @@ import { Platform } from "../emulator/Term";
 
 export function qKeyEventToMinimalKeyboardEvent(event: QKeyEvent): MinimalKeyboardEvent {
   const modifiers = event.modifiers();
-  const altKey = (modifiers & Modifier.ALT) !== 0;
-
+  let altKey = (modifiers & Modifier.ALT) !== 0;
   let ctrlKey = (modifiers & Modifier.CTRL) !== 0;
-  let metaKey = (modifiers & Modifier.META) !== 0;
+  const metaKey = (modifiers & Modifier.META) !== 0;
   const tmp = ctrlKey;
-  ctrlKey = metaKey;
-  metaKey = tmp;
+  ctrlKey = altKey;
+  altKey = tmp;
   const shiftKey = (modifiers & Modifier.SHIFT) !== 0;
 
   const ev: MinimalKeyboardEvent = {
